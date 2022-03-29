@@ -180,8 +180,6 @@ VALUES (6, 20);
 INSERT INTO vegetable_friends (id, FRIEND_ID)
 VALUES (6, 22);
 INSERT INTO vegetable_friends (id, FRIEND_ID)
-VALUES (6, 23);
-INSERT INTO vegetable_friends (id, FRIEND_ID)
 VALUES (6, 24);
 INSERT INTO vegetable_friends (id, FRIEND_ID)
 VALUES (6, 32);
@@ -193,8 +191,6 @@ INSERT INTO vegetable_friends (id, FRIEND_ID)
 VALUES (7, 23);
 INSERT INTO vegetable_friends (id, FRIEND_ID)
 VALUES (7, 18);
-INSERT INTO vegetable_friends (id, FRIEND_ID)
-VALUES (7, 23);
 INSERT INTO vegetable_friends (id, FRIEND_ID)
 VALUES (7, 24);
 INSERT INTO vegetable_friends (id, FRIEND_ID)

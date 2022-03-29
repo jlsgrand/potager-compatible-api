@@ -2,12 +2,8 @@ package fr.jgrand.springpotagercompatibleapi.controller;
 
 import fr.jgrand.springpotagercompatibleapi.model.Vegetable;
 import fr.jgrand.springpotagercompatibleapi.repository.VegetableRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,7 +11,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class VegetableController {
 
-    private VegetableRepository vegetableRepository;
+    private final VegetableRepository vegetableRepository;
 
     public VegetableController(VegetableRepository vegetableRepository) {
         this.vegetableRepository = vegetableRepository;
@@ -24,5 +20,15 @@ public class VegetableController {
     @GetMapping
     public List<Vegetable> getAllVegetables() {
         return vegetableRepository.findAll();
+    }
+
+    @GetMapping("/{id}/friends")
+    public List<Vegetable> getVegetableFriends(@PathVariable Long id) {
+        return vegetableRepository.findAllFriendVegetables(id);
+    }
+
+    @GetMapping("/{id}/enemies")
+    public List<Vegetable> getVegetableEnemies(@PathVariable Long id) {
+        return vegetableRepository.findAllEnemyVegetables(id);
     }
 }

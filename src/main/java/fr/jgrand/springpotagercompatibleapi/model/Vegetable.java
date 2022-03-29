@@ -3,8 +3,9 @@ package fr.jgrand.springpotagercompatibleapi.model;
 import com.fasterxml.jackson.annotation.JsonGetter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -40,14 +41,14 @@ public class Vegetable {
             name = "vegetable_friends",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "friend_id"))
-    private List<Vegetable> friendVegetables = new ArrayList<>();
+    private Set<Vegetable> friendVegetables = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
             name = "vegetable_enemies",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "enemy_id"))
-    private List<Vegetable> enemyVegetables = new ArrayList<>();
+    private Set<Vegetable> enemyVegetables = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -81,11 +82,11 @@ public class Vegetable {
         return endingHarvest;
     }
 
-    public List<Vegetable> getFriendVegetables() {
+    public Set<Vegetable> getFriendVegetables() {
         return friendVegetables;
     }
 
-    public List<Vegetable> getEnemyVegetables() {
+    public Set<Vegetable> getEnemyVegetables() {
         return enemyVegetables;
     }
 
@@ -97,5 +98,15 @@ public class Vegetable {
     @JsonGetter("enemyVegetables")
     public List<String> getEnemyVegetablesString() {
         return enemyVegetables.stream().map(Vegetable::getName).collect(Collectors.toList());
+    }
+
+    @JsonGetter("friendVegetableIds")
+    public List<Long> getFriendVegetableIds() {
+        return friendVegetables.stream().map(Vegetable::getId).collect(Collectors.toList());
+    }
+
+    @JsonGetter("enemyVegetableIds")
+    public List<Long> getEnemyVegetablesIds() {
+        return enemyVegetables.stream().map(Vegetable::getId).collect(Collectors.toList());
     }
 }
