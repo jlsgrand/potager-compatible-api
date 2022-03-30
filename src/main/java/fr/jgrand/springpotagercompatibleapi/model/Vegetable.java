@@ -1,6 +1,8 @@
 package fr.jgrand.springpotagercompatibleapi.model;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -50,6 +52,13 @@ public class Vegetable {
             inverseJoinColumns = @JoinColumn(name = "enemy_id"))
     private Set<Vegetable> enemyVegetables = new HashSet<>();
 
+    public Vegetable() {
+    }
+
+    public Vegetable(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
@@ -90,11 +99,13 @@ public class Vegetable {
         return enemyVegetables;
     }
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonGetter("friendVegetables")
     public List<String> getFriendVegetablesString() {
         return friendVegetables.stream().map(Vegetable::getName).collect(Collectors.toList());
     }
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonGetter("enemyVegetables")
     public List<String> getEnemyVegetablesString() {
         return enemyVegetables.stream().map(Vegetable::getName).collect(Collectors.toList());
@@ -108,5 +119,15 @@ public class Vegetable {
     @JsonGetter("enemyVegetableIds")
     public List<Long> getEnemyVegetablesIds() {
         return enemyVegetables.stream().map(Vegetable::getId).collect(Collectors.toList());
+    }
+
+    @JsonSetter("enemyVegetableIds")
+    public void setEnemyVegetables(List<Long> enemyIds) {
+        this.enemyVegetables = enemyIds.stream().map(Vegetable::new).collect(Collectors.toSet());
+    }
+
+    @JsonSetter("friendVegetableIds")
+    public void setFriendVegetables(List<Long> friendIds) {
+        this.friendVegetables = friendIds.stream().map(Vegetable::new).collect(Collectors.toSet());
     }
 }

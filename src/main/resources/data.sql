@@ -112,6 +112,7 @@ INSERT INTO vegetable (id, name, starting_sowing_cover, ending_Sowing_Cover, sta
                        ending_Sowing_Ground, starting_Harvest, ending_Harvest)
 VALUES (37, 'Fenouil', null, null, null, null, null, null);
 
+ALTER SEQUENCE seq_vegetable RESTART WITH 38;
 
 INSERT INTO vegetable_friends (id, FRIEND_ID)
 VALUES (1, 6);
