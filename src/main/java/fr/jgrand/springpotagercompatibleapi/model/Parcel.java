@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +28,7 @@ public class Parcel {
             name = "parcel_vegetables",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "vegetable_id"))
-    private Set<Vegetable> vegetableList = new HashSet<>();
+    private List<Vegetable> vegetableList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -42,7 +43,7 @@ public class Parcel {
     }
 
     @JsonIgnore
-    public Set<Vegetable> getVegetableList() {
+    public List<Vegetable> getVegetableList() {
         return vegetableList;
     }
 
@@ -53,6 +54,6 @@ public class Parcel {
 
     @JsonSetter("vegetableIds")
     public void setVegetableIds(List<Long> vegetableIds) {
-        this.vegetableList = vegetableIds.stream().map(Vegetable::new).collect(Collectors.toSet());
+        this.vegetableList = vegetableIds.stream().map(Vegetable::new).collect(Collectors.toList());
     }
 }
