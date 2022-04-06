@@ -8,6 +8,7 @@ import fr.jgrand.springpotagercompatibleapi.repository.ParcelRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,6 +20,11 @@ public class ParcelController {
 
     public ParcelController(ParcelRepository parcelRepository) {
         this.parcelRepository = parcelRepository;
+    }
+
+    @GetMapping
+    public List<Parcel> getParcelList() {
+        return parcelRepository.findAll();
     }
 
     @GetMapping("{id}")

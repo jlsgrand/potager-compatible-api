@@ -7,6 +7,7 @@ import fr.jgrand.springpotagercompatibleapi.repository.VegetableRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,9 +66,16 @@ public class VegetableController {
         return ResponseEntity.ok(vegetableRepository.save(vegetable));
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<Vegetable> deleteVegetable(@PathVariable Long id) {
-        vegetableRepository.deleteById(id);
+        // Dissociating relations before deletion
+        Optional<Vegetable> vegetable = vegetableRepository.findById(id);
+        if (vegetable.isPresent()) {
+            vegetableRepository.deleteFriendsById(id);
+            vegetableRepository.deleteEnemiesById(id);
+            vegetableRepository.deleteById(id);
+        }
         return ResponseEntity.noContent().build();
     }
 }

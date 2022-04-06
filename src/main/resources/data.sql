@@ -1,5 +1,7 @@
 -- noinspection SqlNoDataSourceInspectionForFile
-
+INSERT INTO vegetable (id, name, starting_sowing_cover, ending_Sowing_Cover, starting_Sowing_Ground,
+                       ending_Sowing_Ground, starting_Harvest, ending_Harvest)
+VALUES (-1, 'LEGUME FANTOME 👻', null, null, null, null, null, null);
 INSERT INTO vegetable (id, name, starting_sowing_cover, ending_Sowing_Cover, starting_Sowing_Ground,
                        ending_Sowing_Ground, starting_Harvest, ending_Harvest)
 VALUES (1, 'Ail', null, null, 'FEBRUARY', 'MARCH', 'JUNE', 'AUGUST');
