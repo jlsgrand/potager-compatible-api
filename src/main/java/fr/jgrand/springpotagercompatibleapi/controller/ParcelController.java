@@ -63,4 +63,10 @@ public class ParcelController {
 
         return ResponseEntity.ok(parcelRepository.save(parcel));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Parcel> deleteParcel(@PathVariable Long id) {
+        parcelRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
